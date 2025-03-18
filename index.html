@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="de" style="background: linear-gradient(135deg, #0a192f 0%, #050c17 100%);">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Dinar - Premium Experience</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --gold: #d4af37;
+            --blue: #1a73e8;
+            --dark-blue: #0d47a1;
+            --navy: #0a192f;
+            --deep-navy: #050c17;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--deep-navy) 100%);
+            height: 100vh;
+            width: 100vw;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: fixed;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .scene {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--deep-navy) 100%);
+        }
+        
+        .floating-currencies {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .currency {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+            animation: floatCurrency 15s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        @keyframes floatCurrency {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .backdrop {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(26, 115, 232, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: 0;
+        }
+        
+        /* Entfernung aller iPhone-spezifischen Stile */
+        .iphone-container, .iphone, .volume-button, .power-button, .home-indicator, 
+        .screen, .screen-content, .status-bar, .status-bar-left, .status-bar-right,
+        .time, .signal-icon, .wifi-icon, .battery-icon, .shine, .app-icon, .app-name, 
+        .currency-exchange, .currency-value, .exchange-arrow {
+            /* Diese Stile werden nicht mehr benötigt */
+        }
+        
+        /* Background elements */
+        .orbit {
+            position: fixed;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            z-index: 5;
+        }
+        
+        .orbit-1 {
+            width: 100vmin;
+            height: 100vmin;
+            animation: orbitRotate 30s linear infinite;
+        }
+        
+        .orbit-2 {
+            width: 150vmin;
+            height: 150vmin;
+            animation: orbitRotate 45s linear infinite reverse;
+        }
+        
+        @keyframes orbitRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .orbit-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(212, 175, 55, 0.4);
+        }
+        
+        /* Download buttons area */
+        .download-area {
+            position: relative;
+            z-index: 20;
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 400px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @media (max-width: 480px) {
+            .download-area {
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .iphone-container {
+                width: 70%;
+                max-height: 55vh;
+            }
+        }
+        
+        .download-button {
+            position: relative;
+            overflow: hidden;
+            width: 140px;
+            max-width: 45%;
+            padding: 10px 0;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            touch-action: manipulation; /* Improved touch for mobile */
+        }
+        
+        .ios-button {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.3), rgba(0, 122, 255, 0.1));
+        }
+        
+        .android-button {
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.3), rgba(0, 200, 83, 0.1));
+        }
+        
+        .download-button:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .download-button:active {
+            transform: translateY(0);
+            opacity: 0.9;
+        }
+        
+        .download-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(45deg);
+            animation: shineButton 3s infinite;
+            z-index: -1;
+        }
+        
+        @keyframes shineButton {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+        
+        .button-icon {
+            font-size: calc(10px + 1vmin);
+            margin-bottom: 3px;
+        }
+        
+        .button-text {
+            font-size: calc(6px + 1vmin);
+            font-weight: 600;
+        }
+        
+        .button-subtext {
+            font-size: calc(4px + 1vmin);
+            opacity: 0.7;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="backdrop"></div>
+        <div class="floating-currencies" id="currencies"></div>
+        
+        <div class="orbit orbit-1">
+            <div class="orbit-dot" style="top: 0; left: 50%;"></div>
+            <div class="orbit-dot" style="bottom: 0; left: 50%;"></div>
+            <div class="orbit-dot" style="left: 0; top: 50%;"></div>
+            <div class="orbit-dot" style="right: 0; top: 50%;"></div>
+        </div>
+        
+        <div class="orbit orbit-2">
+            <div class="orbit-dot" style="top: 20%; left: 10%;"></div>
+            <div class="orbit-dot" style="top: 70%; right: 20%;"></div>
+            <div class="orbit-dot" style="bottom: 15%; left: 30%;"></div>
+        </div>
+        
+        <!-- Platzhalter für eigenes iPhone-Bild -->
+        <div id="custom-iphone-placeholder" style="width: 70%; max-width: 300px; height: 60vh; margin-bottom: 20px; display: flex; justify-content: center; align-items: center;">
+            <!-- Hier können Sie Ihr eigenes iPhone-Bild einfügen -->
+            <img src="iphone.png" alt="iPhone mit Change Dinar App" style="max-width: 100%; max-height: 100%;">
+        </div>
+        
+        <div class="download-area">
+            <a href="#" class="download-button ios-button" id="ios-link">
+                <div class="button-icon">
+                    <img src="appel.svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"></path>
+                        <path d="M10 2c1 .5 2 2 2 5"></path>
+                    </i>
+                </div>
+                <div class="button-text">App Store</div>
+                <div class="button-subtext">Télécharger</div>
+            </a>
+            
+            <a href="#" class="download-button android-button" id="android-link">
+                <div class="button-icon">
+                    <img src="play.png" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </img>
+                </div>
+                <div class="button-text">Google Play</div>
+                <div class="button-subtext">Télécharger</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // App Store Links - Ersetzen Sie diese mit Ihren tatsächlichen Links
+        const iOS_APP_LINK = "https://apps.apple.com/app/change-dinar/IHRE-APP-ID";
+        const ANDROID_APP_LINK = "https://play.google.com/store/apps/details?id=IHRE-PACKAGE-ID";
+        
+        // Funktion zum Erkennen des Betriebssystems
+        function detectOS() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            // iOS Erkennung
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                return "iOS";
+            }
+            
+            // Android Erkennung
+            if (/android/i.test(userAgent)) {
+                return "Android";
+            }
+            
+            // Andere Betriebssysteme
+            return "other";
+        }
+        
+        // Schwebende Währungssymbole erstellen
+        function createFloatingCurrencies() {
+            const container = document.getElementById('currencies');
+            const symbols = ['$', '€', '£', '¥', '₽', '₹', 'د.ع', '₩', '₺', 'CHF', 'AED', 'SAR'];
+            const numSymbols = Math.min(30, Math.floor(window.innerWidth / 30)); // Anzahl der Symbole an Bildschirmgröße anpassen
+            
+            for (let i = 0; i < numSymbols; i++) {
+                const symbol = document.createElement('div');
+                symbol.classList.add('currency');
+                
+                // Zufälliges Symbol aus der Liste
+                const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+                symbol.textContent = randomSymbol;
+                
+                // Zufällige Position, Größe und Animation
+                const posX = Math.random() * 100;
+                const size = Math.random() * 16 + 10;
+                const delay = Math.random() * 15;
+                const duration = Math.random() * 10 + 10;
+                
+                symbol.style.left = `${posX}%`;
+                symbol.style.fontSize = `${size}px`;
+                symbol.style.animationDuration = `${duration}s`;
+                symbol.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(symbol);
+            }
+        }
+        
+        // Dynamischer 3D-Effekt für iPhone
+        function init3DEffect() {
+            const iphone = document.querySelector('.iphone');
+            
+            document.addEventListener('mousemove', (e) => {
+                if (window.innerWidth <= 768) return; // Nur auf Desktop
+                
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 35;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 35;
+                
+                iphone.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) translateY(0)`;
+            });
+            
+            document.addEventListener('mouseleave', () => {
+                iphone.style.transform = ''; // Zurück zur ursprünglichen Animation
+            });
+        }
+        
+        // Weiterleitung basierend auf Betriebssystem
+        function handleRedirect() {
+            const os = detectOS();
+            const iosLink = document.getElementById('ios-link');
+            const androidLink = document.getElementById('android-link');
+            
+            // Update Links
+            iosLink.href = iOS_APP_LINK;
+            androidLink.href = ANDROID_APP_LINK;
+            
+            // Automatisch hervorheben basierend auf dem erkannten Betriebssystem
+            if (os === "iOS") {
+                iosLink.style.transform = "scale(1.05)";
+                iosLink.style.boxShadow = "0 10px 30px rgba(0, 122, 255, 0.3)";
+            } else if (os === "Android") {
+                androidLink.style.transform = "scale(1.05)";
+                androidLink.style.boxShadow = "0 10px 30px rgba(0, 200, 83, 0.3)";
+            }
+            
+            // Touch-Ereignisse verbessern
+            iosLink.addEventListener('touchstart', function() {
+                this.style.transform = "scale(0.95)";
+            });
+            
+            iosLink.addEventListener('touchend', function() {
+                if (os === "iOS") {
+                    this.style.transform = "scale(1.05)";
+                } else {
+                    this.style.transform = "scale(1)";
+                }
+            });
+            
+            androidLink.addEventListener('touchstart', function() {
+                this.style.transform = "scale(0.95)";
+            });
+            
+            androidLink.addEventListener('touchend', function() {
+                if (os === "Android") {
+                    this.style.transform = "scale(1.05)";
+                } else {
+                    this.style.transform = "scale(1)";
+                }
+            });
+        }
+        
+        // Hauptfunktion
+        function init() {
+            createFloatingCurrencies();
+            init3DEffect();
+            handleRedirect();
+            
+            // Bildschirmgröße ändern
+            window.addEventListener('resize', function() {
+                document.getElementById('currencies').innerHTML = '';
+                createFloatingCurrencies();
+            });
+        }
+        
+        // Seite initialisieren
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
